@@ -2,6 +2,9 @@
 import matplotlib.pyplot as plt
 
 def main():
+    # Génération d’une grille correcte
+
+    # Jeu
     
 
 

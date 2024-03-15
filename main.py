@@ -9,7 +9,10 @@ def main():
     # Tant que echange_existe (un échange peut donner une combinaison)
     
     
-def creation_grille_aleatoire()
+def creation_grille_aleatoire():
+    """
+        Fonction renvoyant une grille 5x5 remplie de valeurs de 0 à 3 
+    """
 
 
 def detecte_coordonnees_combinaison(grille, i, j):

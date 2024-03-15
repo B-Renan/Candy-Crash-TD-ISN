@@ -5,8 +5,9 @@ def main():
     # Génération d’une grille correcte
 
     # Jeu
+    # Tant que echange_existe (un échange peut donner une combinaison)
+        # On demande coordonnées à l’user (boucle, jusqu’à ce que ça soit bon)
     
-
 
 def detecte_coordonnees_combinaison(grille, i, j):
     """

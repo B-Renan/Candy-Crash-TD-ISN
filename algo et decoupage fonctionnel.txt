@@ -13,6 +13,8 @@ Algorithme de fonctionnement du jeu :
         Faire disparître les bonbons alignés.
         Actualiser la grille 
         Afficher la grille
+    Sinon :
+      Afficher le message " couple de bonbon impossible a permuter : choisir un autre couple "
 
 
 

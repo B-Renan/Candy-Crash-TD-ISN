@@ -9,7 +9,8 @@ Algorithme de fonctionnement du jeu :
   Echanger les position des bonbons
   Répéter jusqu'à ce que les positions des bonbons ne respectent plus les règles de disparition des bonbons : 
     Faire disparître les bonbons alignés.
-    Actualiser la grille Afficher la grille
+    Actualiser la grille 
+    Afficher la grille
 
 
 

@@ -19,6 +19,23 @@ Algorithme de fonctionnement du jeu :
 
 
 Découpage fonctionnel : 
+def creation_grille_aleatoire():
+    '''
+    cree une grille de taille 5*5 
+    Répéter jusqu'a avoir une grille valable :
+      Répéter tant qu’il y a des combinaisons sur la grille : 
+          Faire disparître les bonbons alignés.
+          Actualiser la grille 
+      vérifier qu'au moins un échange est possible:
+        Si aucune échange n'est possible:
+          valable = faux 
+        Sinon :
+          valable = vrai
+
+    Entree : rien   
+    Sortie : Grille de taille 5*5 et valable pour jouer
+    '''
+
 def detecte_coordonnees_combinaison(grille, i, j): 
 """ 
     Renvoie une liste contenant les coordonnées de tous les bonbons appartenant à la combinaison du bonbon (i, j). 

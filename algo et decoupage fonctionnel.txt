@@ -5,8 +5,10 @@ Algorithme de fonctionnement du jeu :
 -Afficher la grille 2D
 
 -Répéter tant qu’il existe au moins un échange qui peut faire une combinaison : 
-  Demander au joueur les positions des bonbons qu'il veut échanger 
-  Echanger les position des bonbons
+  Tant qu'aucune position de bonbon à été echangée :
+    Demander au joueur les positions des bonbons qu'il veut échanger 
+    Si l'échange est possible :
+      Echanger les position des bonbons
   Répéter jusqu'à ce que les positions des bonbons ne respectent plus les règles de disparition des bonbons : 
     Faire disparître les bonbons alignés.
     Actualiser la grille 

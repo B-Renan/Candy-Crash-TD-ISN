@@ -11,9 +11,10 @@ def main():
     
 def creation_grille_aleatoire():
     """
-        Fonction renvoyant une grille 5x5 remplie de valeurs de 0 à 3 
-    """
-
+        Entree : rien   
+    Sortie : Grille de taille 5*5 et valable pour jouer
+Fonction créant une grille de manière aléatoire qui ne contient aucune combinaison déjà présente et qui contient au moins un échange possible
+    '''
 
 def detecte_coordonnees_combinaison(grille, i, j):
     """

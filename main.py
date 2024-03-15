@@ -17,7 +17,8 @@ def creation_grille_aleatoire():
 
 def detecte_coordonnees_combinaison(grille, i, j):
     """
-        Renvoie une liste contenant les coordonnées de tous les bonbons
+    entrée : grille, coordonnées (i,j) du bonbon
+    sortie : une liste contenant les coordonnées de tous les bonbons
         appartenant à la combinaison du bonbon (i, j).
     """
 
@@ -31,3 +32,17 @@ def affichage_grille(grille, nb_type_bonbons=4):
     plt.pause(0.1)
     plt.draw()
     plt.pause(0.1)
+
+def modification_grille(grille):
+  '''
+entrée : grille 
+sortie : rien
+Prend en entrée une grille qui présente des combinaison. La fonction supprime ces combinaisons et remplace dans la grille les espaces vides par des bonbons choisis aléatoirement
+  '''
+
+def test_detecte_coordonnees_combinaison(): 
+""" Test la fonction detecte_coordonnees_combinaison(grille, i, j). 
+Pour chaque cas de test, affiche True si le test passe, False sinon 
+"""
+
+def decalage_bas(grille):

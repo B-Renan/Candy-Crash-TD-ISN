@@ -1,5 +1,5 @@
 découpage... Algorithme de fonctionnement du jeu : 
-Créer une grille 2D avec des bonbons placés aléatoirement, mais qui permette un mouvement. 
+Créer une grille 2D avec des bonbons placés aléatoirement, mais qui permette un mouvement + aucune combinaison déjà présente
 Afficher la grille 2D
 Répéter jusqu'a ce qu'aucun mouvement ne puisse faire disparaitre des bonbons ( i.e. l'échange des bonbons est possible ) : 
   Demander au joueur les positions des bonbons qu'il veut échanger 

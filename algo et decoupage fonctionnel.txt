@@ -5,7 +5,7 @@ Algorithme de fonctionnement du jeu :
 -Afficher la grille 2D
 
 -Répéter tant qu’il existe au moins un échange qui peut faire une combinaison : 
-  Tant qu'aucune position de bonbon à été echangée :
+  Tant qu'aucune combinaison valide n'à été trouvée. :
     Demander au joueur les positions des bonbons qu'il veut échanger 
     Si l'échange est possible :
       Echanger les position des bonbons

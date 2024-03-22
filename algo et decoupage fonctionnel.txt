@@ -24,7 +24,8 @@ def creation_grille_aleatoire():
     '''
     cree une grille de taille 5*5 
     Répéter jusqu'a avoir une grille valable :
-      Répéter tant qu’il y a des combinaisons sur la grille : 
+      Répéter tant qu’il y a des combinaisons sur la grille 
+: 
           Faire disparître les bonbons alignés.
           Actualiser la grille 
       vérifier qu'au moins un échange est possible:
@@ -42,8 +43,16 @@ def modification_grille(grille):
   '''
 entrée : grille 
 sortie : rien
-Prend en entrée une grille qui présente des combinaison. La fonction supprime ces combinaisons et remplace dans la grille les espaces vides par des bonbons choisit aléatoirement
+Prend en entrée une grille qui présente des combinaisons à supprimer. La fonction supprime ces combinaisons et remplace dans la grille les espaces vides par des bonbons choisis aléatoirement
+
   '''
+
+def decalage_bas(grille) :
+ '''
+entrée : grille
+sortie : rien 
+prend une grille contenant des espaces vides en entrée et décale les bonbons de cette grille vers le bas lorsqu'il y a un espace vide en dessous d'eux 
+ '''
 
 def detecte_coordonnees_combinaison(grille, i, j): 
 """ 

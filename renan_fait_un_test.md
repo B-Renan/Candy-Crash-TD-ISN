@@ -13,4 +13,4 @@ condition d’arrêt : aucun échange ne permet de faire une combinaison
 
  - boucle de vérification des coos
 
- -  
+ -   

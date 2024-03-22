@@ -1,5 +1,6 @@
 # Main file of the project
 import matplotlib.pyplot as plt
+from random import randint
 
 def main():
     # Génération d’une grille correcte
@@ -11,10 +12,19 @@ def main():
     
 def creation_grille_aleatoire():
     """
-        Entree : rien   
-    Sortie : Grille de taille 5*5 et valable pour jouer
-Fonction créant une grille de manière aléatoire qui ne contient aucune combinaison déjà présente et qui contient au moins un échange possible
-    '''
+        Fonction créant une grille aléatoire qui ne contient aucune combinaison (déjà présente) et qui contient au moins un échange possible.
+        Valeurs de la grille entre 0 et 3, taille de 5x5
+
+        Sortie : grille -> 2D list, grille du jeu
+    """
+    grille = [[randint(0, 3) for _ in range(5)] for _ in range(5)]
+    # On enlève toutes les combinaisons possibles
+        
+    # On vérifie qu’il existe au moins un échange qui entraine une combinaison
+    
+    # (Si c’est pas le cas on regénère la grille)
+    
+    return grille
 
 def detecte_coordonnees_combinaison(grille, i, j):
     """

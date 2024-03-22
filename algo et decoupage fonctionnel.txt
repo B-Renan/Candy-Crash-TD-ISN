@@ -15,6 +15,7 @@ Algorithme de fonctionnement du jeu :
         Afficher la grille
     Sinon :
       Afficher le message " couple de bonbon impossible a permuter : choisir un autre couple "
+ Afficher '' Game over ! " 
 
 
 

@@ -152,37 +152,32 @@ def supprime_comb(grille, liste):
             coos. des bonbons de la combinaison.
         Sortie : None, la grille est modifiée directement
     """
-    # Si liste est pas vide
-    if liste != []:
-        # Si c’est une combinaison horizontale (les x des 3 2-uple sont les mêmes)
-        coo1, coo2, coo3 = liste[0], liste[1], liste[2]
-        if coo1[0] == coo2[0] and coo1[0] == coo3[0]:
-            # VERIFIER QUE LA COMB EXISTE ENCORE, c’est une vérification de + au cas où il y a une erreur dans le raisonnement. 
-            #pourra être enlevé si démontré que non
-            if grille[coo1] == grille[coo2] and grille[coo1] == grille[coo3]:
-                # On met la couleur blanche, affiche, puis déplace et supprime
-                grille[coo1], grille[coo2], grille[coo3] = 4, 4, 4
-                afficher_grille(grille)
+        # Si la liste est pas vide
+        if liste != []:
+
+            if grille[liste[0][0]][liste[0][1]] == grille[liste[1][0]][liste[1][1]] and grille[liste[0][0]][liste[0][1]] == grille[liste[2][0]][liste[2][1]]:
+                # VERIFIER QUE LA COMB EXISTE ENCORE, c’est une vérification de + au cas où il y a une erreur dans le raisonnement. 
+                #pourra être enlevé si démontré que non
+    
+                # Si c’est une combinaison horizontale (les x des 3 2-uple sont les mêmes)
+                if liste[0][0] == liste[1][0] and liste[0][0] == liste[2][0]:
+            
+                    # déplacer vers le bas
+                    for (x, y) in liste:
+                        for x_i in range(x, 0, -1):
+                            grille[x_i][y] = grille[x_i-1][y]
+    
+                        # Modifier valeurs en haut (3 en ligne ou 3 en colonne)
+                        grille[0][y] = randint(0, 3)
                 
-                # déplacer vers le bas
-                for (x, y) in liste:
-                    for x_i in range(x, 0, -1):
-                        grille[x_i][y] = grille[x_i-1][y]
-
-                    # Modifier valeurs en haut (3 en ligne ou 3 en colonne)
-                    grille[0][y] = randint(0, 3)
-        
-        # Sinon, c’est une combinaison verticale
-        else:
-            if grille[coo1] == grille[coo2] and grille[coo1] == grille[coo3]:
-                x, y = liste[0] # On prend le premier couple, qui est la case du bas de la comb.
-                for _ in range(3):
-                    for i in range(y, 0, -1):
-                        grille[i][y] = grille[i-1][y]
-
-                    grille[0][y] = randint(0, 3)
-
-        afficher_grille(grille)
+                # Sinon, c’est une combinaison verticale
+                else:
+                    x, y = liste[0] # On prend le premier couple, qui est la case du bas de la comb.
+                    for _ in range(3):
+                        for i in range(y, 0, -1):
+                            grille[i][y] = grille[i-1][y]
+    
+                        grille[0][y] = randint(0, 3)
 
 
 """

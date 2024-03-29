@@ -171,12 +171,15 @@ def creation_grille():
     return grille
 
 
+# Fonction d’affichage de test
+"""
 def afficher_grille(grille):
     for line in grille:
         for char in line:
             print(char, end=" ")
         print()
     print()
+"""
 
 def afficher_grille(grille, nb_type_bonbons=4, latency=0.2):
     """

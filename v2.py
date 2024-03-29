@@ -66,7 +66,48 @@ def combinaison_presente(grille):
         y = 0
     
     return c
+
+def dcb(grille, x, y):
+    """
+        Fonction detecte_coordonnee_combinaison. Pour une cellule donnée, renvoie les coordonnées des bonbons constituant une combinaison 
+        s'il y en a une, sinon une liste vide.
+        Entrée :
+            * grille -> 2D list
+            * x, y -> int, coordonnée de la cellule étudiée
+        Sortie : 
+            * list -> vide si le bonbon ne forme pas une combinaison, les coordonnées des autres bonbons de la comb sinon.
+    """
     
+    liste = []
+    
+    if 0 <= x-2:
+        if grille[x-2][y] == grille[x-1][y] == grille[x][y]:
+            liste = [(x-2,y), (x-1,y), (x,y)]
+            
+    if x-1 >= 0 and x+1 <= 4 and liste != []:
+        if grille[x-1][y] == grille[x][y] == grille[x+1][y]:
+            liste = [(x-1,y), (x,y), (x+1,y)]
+            
+    if x+2 <= 4  and liste != []:
+        if grille[x][y] == grille[x+1][y] == grille[x+2][y]:
+            liste = [(x,y), (x+1,y), (x+2,y)]
+
+    if 0 <= y-2 and liste != []:
+        if grille[x][y-2] == grille[x][y-1] == grille[x][y]:
+            liste = [(x,y-2), (x,y-1), (x,y)]
+            
+    if y-1 >= 0 and y+1 <= 4 and liste != []:
+        if grille[x][y-1] == grille[x][y] == grille[x][y+1]:
+            liste = [(x,y-1), (x,y), (x,y+1)]
+            
+    if y+2 <= 4  and liste != []:
+        if grille[x][y] == grille[x][y+1] == grille[x][y+2]:
+            liste = [(x,y), (x,y+1), (x,y+2)]
+    
+    
+    return liste
+
+
 def test_fini(grille):
     ''' 
     Fonction qui teste au moins une combinaison  potentielle est présente dans la grille. Pour cela, elle échange sucessivement les positions des bonbons adjacents de la grille de toutes les manières possibles.

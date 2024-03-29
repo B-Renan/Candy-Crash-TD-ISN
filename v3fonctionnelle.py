@@ -154,30 +154,27 @@ def dcb(grille, x, y):
     liste = []
     
     # Cas verticaux
-    if 0 <= x-2:
-        if grille[x-2][y] == grille[x-1][y] == grille[x][y]:
-            liste = [(x,y), (x-1,y), (x-2,y)]
+    if 0 <= x-2 and grille[x-2][y] == grille[x-1][y] == grille[x][y]:
+        liste = [(x,y), (x-1,y), (x-2,y)]
             
-    if x-1 >= 0 and x+1 <= 4 and liste == []:
-        if grille[x-1][y] == grille[x][y] == grille[x+1][y]:
-            liste = [(x+1,y), (x,y), (x-1,y)]
+    elif (x-1 >= 0 and x+1 <= 4) and grille[x-1][y] == grille[x][y] == grille[x+1][y]:
+        liste = [(x+1,y), (x,y), (x-1,y)]
             
-    if x+2 <= 4  and liste == []:
-        if grille[x][y] == grille[x+1][y] == grille[x+2][y]:
-            liste = [(x+2,y), (x+1,y), (x,y)]
+    elif x+2 <= 4 and grille[x][y] == grille[x+1][y] == grille[x+2][y]:
+        liste = [(x+2,y), (x+1,y), (x,y)]
     
     # Cas horizontaux
-    if 0 <= y-2 and liste == []:
-        if grille[x][y-2] == grille[x][y-1] == grille[x][y]:
-            liste = [(x,y-2), (x,y-1), (x,y)]
+    elif 0 <= y-2 and grille[x][y-2] == grille[x][y-1] == grille[x][y]:
+        liste = [(x,y-2), (x,y-1), (x,y)]
             
-    if y-1 >= 0 and y+1 <= 4 and liste == []:
-        if grille[x][y-1] == grille[x][y] == grille[x][y+1]:
-            liste = [(x,y-1), (x,y), (x,y+1)]
+    elif (y-1 >= 0 and y+1 <= 4) and grille[x][y-1] == grille[x][y] == grille[x][y+1]:
+        liste = [(x,y-1), (x,y), (x,y+1)]
             
-    if y+2 <= 4  and liste == []:
-        if grille[x][y] == grille[x][y+1] == grille[x][y+2]:
-            liste = [(x,y), (x,y+1), (x,y+2)]
+    elif y+2 <= 4 and grille[x][y] == grille[x][y+1] == grille[x][y+2]:
+        liste = [(x,y), (x,y+1), (x,y+2)]
+    
+    
+    return liste
     
     
     return liste

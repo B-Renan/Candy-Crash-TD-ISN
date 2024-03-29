@@ -191,12 +191,12 @@ def creation_grille():
     return grille
     
 
-def afficher_grille(grille, nb_type_bonbons=5, latency=0.2):
+def afficher_grille(grille, latency=0.2):
     """
         Affiche la grille de jeu "grille" contenant au
         maximum "nb_type_bonbons" couleurs de bonbons différentes.
     """
-    plt.imshow(grille, vmin=0, vmax=nb_type_bonbons-1, cmap='terrain')
+    plt.imshow(grille, vmin=0, vmax=4, cmap='terrain')
     plt.pause(latency)
     plt.draw()
     plt.pause(latency)

@@ -27,11 +27,12 @@ def main():
             afficher_grille(grille)
             print("Ça n’a pas provoqué de combinaison")
         else:
-            print("Ça fait une comb")
+            print("Ça fait une combinaison")
             supprime_comb(grille, c1) # Modifie la grille pour enlever les combinaisons (une ou deux selon le cas)
             supprime_comb(grille, c2)
-
             boucle_suppression(grille)
+            fin = test_fini(grille)
+    print(" Game over ")
 
 
 def boucle_suppression(grille, afficher=True):
@@ -65,7 +66,40 @@ def combinaison_presente(grille):
         y = 0
     
     return c
-
+    
+def test_fini(grille):
+    ''' 
+    Fonction qui teste au moins une combinaison  potentielle est présente dans la grille. Pour cela, elle échange sucessivement les positions des bonbons adjacents de la grille de toutes les manières possibles.
+    Entrée : grille 
+    sortie  : fini
+    objectif : évaluer fini a true ou false 
+    ''' 
+    trouve = False
+    # Horizontal
+    y = 0
+    while y < 5 and not trouve:
+        x = 0 
+        while x < 4 and not trouve :
+            echange(grille, x, y, x+1 , y)
+            if combinaison_presente(grille) != []:
+                trouve = True 
+            echange(grille, x, y, x+1 , y)
+            x += 1
+        y += 1 
+    # Vertical 
+    x = 0
+    while x < 5 and not trouve:
+        y = 0 
+        while y < 4 and not trouve :
+            echange(grille, x, y, x , y + 1)
+            if combinaison_presente(grille) != []:
+                trouve = True 
+            echange(grille, x, y, x , y + 1)
+            y += 1
+        x += 1 
+    if not trouve :
+        fini = True
+    return fini
 
 def supprime_comb(grille, liste):
     """

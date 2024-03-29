@@ -153,37 +153,6 @@ for line in test:
     print(line)
 """
 
-def dcb(grille, x, y): # NE MARCHE QUE SI ON TAPE D’EMBLÉE SUR LA CASE CENTRALE DE LA COMBINAISON
-    """
-        Fonction detecte_coordonnee_combinaison. Pour une cellule donnée, renvoie les coordonnées des bonbons constituant une combinaison 
-        s'il y en a une, sinon une liste vide
-        Entrée :
-            * grille -> 2D list
-            * x, y -> int, coordonnée de la cellule étudiée
-        Sortie : list, vide si le bonbon ne forme pas une combinaison, les coordonnées des autres bonbons de la comb sinon.
-    """
-    coo_combinaison = []
-    # Combinaison horizontale
-    if (y > 0 and y < 4): # On ne teste pas x, supposant qu’il est compris entre 0 et 4
-        combinaison_horizontale = (grille[x][y] == grille[x][y-1] and grille[x][y] == grille[x][y+1])
-        if combinaison_horizontale:
-            coo_combinaison = [(x, y-1), (x, y), (x, y+1)]
-
-    # Combinaison verticale
-    if coo_combinaison == [] and (x > 0 and x < 4): # On ne teste pas y, supposant qu’il est compris entre 0 et 4
-        combinaison_verticale = (grille[x][y] == grille[x-1][y] and grille[x][y] == grille[x+1][y])
-        if combinaison_verticale:
-            coo_combinaison = [(x+1, y), (x, y), (x-1, y)] # On met d’abord celui du bas
-
-    return coo_combinaison
-
-
-def dcb(grille, x, y):
-    coo_combinaison = []
-
-    
-
-    return coo_combinaison
 
 """
 test = [[0 for _ in range(5)] for _ in range(5)]
@@ -208,6 +177,16 @@ def afficher_grille(grille):
             print(char, end=" ")
         print()
     print()
+
+def afficher_grille(grille, nb_type_bonbons=4, latency=0.2):
+    """
+        Affiche la grille de jeu "grille" contenant au
+        maximum "nb_type_bonbons" couleurs de bonbons différentes.
+    """
+    plt.imshow(grille, vmin=0, vmax=nb_type_bonbons-1, cmap='jet')
+    plt.pause(latency)
+    plt.draw()
+    plt.pause(latency)
 
 
 main()

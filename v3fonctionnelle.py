@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 
 def main():
     # On crée la grille
-    grille = creation_grille(3)
+    grille = creation_grille(5)
     # On affiche la grille
     afficher_grille(grille)
 
+    score = 0
     fin = jeu_fini(grille)
     while not fin:
         # On demande les coordonnees des deux cellules a echanger
@@ -25,8 +26,10 @@ def main():
             # Modifie la grille pour enlever les combinaisons (une ou deux selon le cas)
             if combi1 != []:
                 supprime_comb(grille, combi1)
+                score += 1
             if combi2 != []:
                 supprime_comb(grille, combi2)
+                score += 1
             afficher_grille(grille)
 
             boucle_suppression(grille)
@@ -39,7 +42,7 @@ def boucle_suppression(grille, afficher=True):
     c = combinaison_presente(grille)
     # Tant qu’il reste des combinaisons
     while c != []:
-        supprime_comb(grille, c)
+        supprime_comb(grille, c, afficher)
         if afficher:
             afficher_grille(grille)
 
@@ -102,7 +105,7 @@ def combinaison_presente(grille):
     return c
 
 
-def supprime_comb(grille, liste):
+def supprime_comb(grille, liste, afficher=True):
     """
         Fonction déplaçant les éléments de la grille au dessus des cellules contenues dans liste
         vers le bas et générant des nouvelles valeurs en haut de la grille.
@@ -118,7 +121,8 @@ def supprime_comb(grille, liste):
 
         # On met la couleur blanche et affiche
         grille[liste[0][0]][liste[0][1]], grille[liste[1][0]][liste[1][1]], grille[liste[2][0]][liste[2][1]] = 4, 4, 4
-        afficher_grille(grille)
+        if afficher:
+            afficher_grille(grille)
         
         # Si c’est une combinaison horizontale (les x des 3 2-uple sont les mêmes)
         if liste[0][0] == liste[1][0] and liste[0][0] == liste[2][0]:
@@ -184,7 +188,7 @@ def echange(grille, x1, y1, x2, y2):
 
 def creation_grille(taille):
     grille = [[randint(0,3) for _ in range(taille)] for _ in range(taille)]
-    boucle_suppression(grille)
+    boucle_suppression(grille, False)
     
     return grille
     

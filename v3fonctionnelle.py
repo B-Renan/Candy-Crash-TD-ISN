@@ -4,12 +4,11 @@ import matplotlib.pyplot as plt
 
 def main():
     # On crée la grille
-    grille = creation_grille()
+    grille = creation_grille(3)
     # On affiche la grille
     afficher_grille(grille)
-    score = 0
 
-    fin = False
+    fin = jeu_fini(grille)
     while not fin:
         # On demande les coordonnees des deux cellules a echanger
         x1, y1, x2, y2 = map(int, input("Coordonnées : ").split())
@@ -31,7 +30,7 @@ def main():
             afficher_grille(grille)
 
             boucle_suppression(grille)
-            fin = test_fini(grille)
+            fin = jeu_fini(grille)
     print("Game over...")
 
 
@@ -47,19 +46,19 @@ def boucle_suppression(grille, afficher=True):
         c = combinaison_presente(grille)
 
 
-def test_fini(grille):
+def jeu_fini(grille):
     ''' 
     Fonction qui teste au moins une combinaison  potentielle est présente dans la grille. Pour cela, elle échange sucessivement les positions des bonbons adjacents de la grille de toutes les manières possibles.
     Entrée : grille 
     sortie  : fini
     objectif : évaluer fini a true ou false 
     ''' 
-    trouve = False
+    taille, trouve = len(grille), False
     # Horizontal
     y = 0
-    while y < 5 and not trouve:
+    while y < taille and not trouve:
         x = 0 
-        while x < 4 and not trouve :
+        while x < taille-1 and not trouve :
             echange(grille, x, y, x+1 , y)
             if combinaison_presente(grille) != []:
                 trouve = True 
@@ -68,15 +67,16 @@ def test_fini(grille):
         y += 1 
     # Vertical 
     x = 0
-    while x < 5 and not trouve:
+    while x < taille and not trouve:
         y = 0 
-        while y < 4 and not trouve :
+        while y < taille-1 and not trouve :
             echange(grille, x, y, x , y + 1)
             if combinaison_presente(grille) != []:
                 trouve = True 
             echange(grille, x, y, x , y + 1)
             y += 1
-        x += 1 
+        x += 1
+    
     return not trouve
 
 
@@ -87,10 +87,10 @@ def combinaison_presente(grille):
         Entrée : grille -> 2D list
         Sortie : list, la liste de coordonées des cellules formant la combinaison
     """ 
-    trouve = False
+    taille, trouve = len(grille), False
     x, y = 0, 0
-    while not trouve and x <= 4:
-        while not trouve and y <= 4:
+    while not trouve and x < taille:
+        while not trouve and y < taille:
             c = dcb(grille, x, y)
             if c != []:
                 trouve = True
@@ -142,7 +142,7 @@ def supprime_comb(grille, liste):
 
 
 def dcb(grille, x, y):
-    """
+    """ 
         Fonction detecte_coordonnee_combinaison. Pour une cellule donnée, renvoie les coordonnées des bonbons constituant une combinaison 
         s'il y en a une, sinon une liste vide.
         Entrée :
@@ -152,29 +152,27 @@ def dcb(grille, x, y):
             * list -> vide si le bonbon ne forme pas une combinaison, les coordonnées des autres bonbons de la comb sinon.
     """
     liste = []
+    taille = len(grille)
     
     # Cas verticaux
     if 0 <= x-2 and grille[x-2][y] == grille[x-1][y] == grille[x][y]:
         liste = [(x,y), (x-1,y), (x-2,y)]
             
-    elif (x-1 >= 0 and x+1 <= 4) and grille[x-1][y] == grille[x][y] == grille[x+1][y]:
+    elif (x-1 >= 0 and x+1 < taille) and grille[x-1][y] == grille[x][y] == grille[x+1][y]:
         liste = [(x+1,y), (x,y), (x-1,y)]
             
-    elif x+2 <= 4 and grille[x][y] == grille[x+1][y] == grille[x+2][y]:
+    elif x+2 < taille and grille[x][y] == grille[x+1][y] == grille[x+2][y]:
         liste = [(x+2,y), (x+1,y), (x,y)]
     
     # Cas horizontaux
     elif 0 <= y-2 and grille[x][y-2] == grille[x][y-1] == grille[x][y]:
         liste = [(x,y-2), (x,y-1), (x,y)]
             
-    elif (y-1 >= 0 and y+1 <= 4) and grille[x][y-1] == grille[x][y] == grille[x][y+1]:
+    elif (y-1 >= 0 and y+1 < taille) and grille[x][y-1] == grille[x][y] == grille[x][y+1]:
         liste = [(x,y-1), (x,y), (x,y+1)]
             
-    elif y+2 <= 4 and grille[x][y] == grille[x][y+1] == grille[x][y+2]:
+    elif y+2 < taille and grille[x][y] == grille[x][y+1] == grille[x][y+2]:
         liste = [(x,y), (x,y+1), (x,y+2)]
-    
-    
-    return liste
     
     
     return liste
@@ -184,14 +182,14 @@ def echange(grille, x1, y1, x2, y2):
     grille[x1][y1], grille[x2][y2] = grille[x2][y2], grille[x1][y1]
 
 
-def creation_grille():
-    grille = [[randint(0,3) for _ in range(5)] for _ in range(5)]
+def creation_grille(taille):
+    grille = [[randint(0,3) for _ in range(taille)] for _ in range(taille)]
     boucle_suppression(grille)
     
     return grille
     
 
-def afficher_grille(grille, latency=0.2):
+def afficher_grille(grille, latency=0.05):
     """
         Affiche la grille de jeu "grille" contenant au
         maximum "nb_type_bonbons" couleurs de bonbons différentes.

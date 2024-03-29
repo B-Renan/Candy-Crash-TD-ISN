@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 
 def main():
     # On crée la grille
-    print("Lancement programme…")
     grille = creation_grille()
     # On affiche la grille
     afficher_grille(grille)
@@ -31,7 +30,6 @@ def main():
             print("Ça fait une comb")
             supprime_comb(grille, c1) # Modifie la grille pour enlever les combinaisons (une ou deux selon le cas)
             supprime_comb(grille, c2)
-            afficher_grille(grille)
 
             boucle_suppression(grille)
 
@@ -42,8 +40,6 @@ def boucle_suppression(grille, afficher=True):
     # Tant qu’il reste des combinaisons
     while c != []:
         supprime_comb(grille, c)
-        if afficher:
-            afficher_grille(grille)
 
         c = combinaison_presente(grille)
         print(c)
@@ -89,7 +85,10 @@ def supprime_comb(grille, liste):
             # VERIFIER QUE LA COMB EXISTE ENCORE, c’est une vérification de + au cas où il y a une erreur dans le raisonnement. 
             #pourra être enlevé si démontré que non
             if grille[coo1] == grille[coo2] and grille[coo1] == grille[coo3]:
-
+                # On met la couleur blanche, affiche, puis déplace et supprime
+                grille[coo1], grille[coo2], grille[coo3] = 4, 4, 4
+                afficher_grille(grille)
+                
                 # déplacer vers le bas
                 for (x, y) in liste:
                     for x_i in range(x, 0, -1):
@@ -107,6 +106,10 @@ def supprime_comb(grille, liste):
                         grille[i][y] = grille[i-1][y]
 
                     grille[0][y] = randint(0, 3)
+
+        afficher_grille(grille)
+
+
 """
 test = [[0 for _ in range(5)] for _ in range(5)]
 test[4][4], test[4][3], test[4][2] = 1, 1, 1

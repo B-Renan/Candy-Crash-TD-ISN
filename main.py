@@ -26,12 +26,51 @@ def creation_grille_aleatoire():
     
     return grille
 
-def detecte_coordonnees_combinaison(grille, i, j):
+def detecte_coordonnees_combinaison(grille, i, j): 
+    """ 
+        Renvoie une liste contenant les coordonnées de tous les bonbons appartenant à la combinaison du bonbon (i, j). 
+        Entree:
+            grille : double liste de 5 par 5
+            i : (entier) indice de la ligne de la case 
+            j: (entier) indice de la colonne de la case 
+        Sortie 
+            liste_coord : liste revoyant les indices de la combinaison
     """
-    entrée : grille, coordonnées (i,j) du bonbon
-    sortie : une liste contenant les coordonnées de tous les bonbons
-        appartenant à la combinaison du bonbon (i, j).
-    """
+    liste_coord = []
+
+    if grille[i][j-2] == grille[i][j-1] == grille[i][j]:
+        liste_coord.append([i,j-2])
+        liste_coord.append([i,j-1])
+        liste_coord.append([i,j])
+
+    elif grille[i][j-1] == grille[i][j] == grille[i][j+1]:
+        liste_coord.append([i,j-1])
+        liste_coord.append([i,j])
+        liste_coord.append([i,j+1])
+
+    
+    elif grille[i][j] == grille[i][j+1] == grille[i][j+2]:
+        liste_coord.append([i,j])
+        liste_coord.append([i,j+1])
+        liste_coord.append([i,j+2])
+
+    elif grille[i-2][j] == grille[i-1][j] == grille[i][j]:
+        liste_coord.append([i-2,j])
+        liste_coord.append([i-1,j])
+        liste_coord.append([i,j])
+
+    elif grille[i-1][j] == grille[i][j] == grille[i+1][j]:
+        liste_coord.append([i-1,j])
+        liste_coord.append([i,j])
+        liste_coord.append([i+1,j])
+
+    
+    elif grille[i][j] == grille[i+1][j] == grille[i+2][j]:
+        liste_coord.append([i,j])
+        liste_coord.append([i+1,j])
+        liste_coord.append([i+1,j])
+
+    return liste_coord
 
 
 def affichage_grille(grille, nb_type_bonbons=4):

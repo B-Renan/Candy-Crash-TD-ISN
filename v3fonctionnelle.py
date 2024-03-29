@@ -7,25 +7,27 @@ def main():
     grille = creation_grille()
     # On affiche la grille
     afficher_grille(grille)
+    score = 0
 
     fin = False
     while not fin:
         # On demande les coordonnees des deux cellules a echanger
-        x1, y1, x2, y2 = map(int, input("coos :").split())
+        x1, y1, x2, y2 = map(int, input("Coordonnées : ").split())
         print()
 
-        print("on affiche l’échange")
         echange(grille, x1, y1, x2, y2)
         afficher_grille(grille)
         
-
-        c1, c2 = dcb(grille, x1, y1), dcb(grille, x2, y2)
-        if c1 == [] and c2 == []:
+        combi1, combi2 = dcb(grille, x1, y1), dcb(grille, x2, y2)
+        if combi1 == [] and combi2 == []:
             echange(grille, x1, y1, x2, y2)
             afficher_grille(grille)
         else:
-            supprime_comb(grille, c1) # Modifie la grille pour enlever les combinaisons (une ou deux selon le cas)
-            supprime_comb(grille, c2)
+            # Modifie la grille pour enlever les combinaisons (une ou deux selon le cas)
+            if combi1 != []:
+                supprime_comb(grille, combi1)
+            if combi2 != []:
+                supprime_comb(grille, combi2)
             afficher_grille(grille)
 
             boucle_suppression(grille)
@@ -43,7 +45,6 @@ def boucle_suppression(grille, afficher=True):
             afficher_grille(grille)
 
         c = combinaison_presente(grille)
-        print(c)
 
 
 def test_fini(grille):
@@ -111,32 +112,33 @@ def supprime_comb(grille, liste):
             coos. des bonbons de la combinaison.
         Sortie : None, la grille est modifiée directement
     """
-    # Si liste est pas vide
-    if liste != []:
+    
+    # La condition suivante est peut être inutile, j’ai la flemme de vérifier, pour être franchement honnête.
+    if grille[liste[0][0]][liste[0][1]] == grille[liste[1][0]][liste[1][1]] and grille[liste[0][0]][liste[0][1]] == grille[liste[2][0]][liste[2][1]]:
 
-        if grille[liste[0][0]][liste[0][1]] == grille[liste[1][0]][liste[1][1]] and grille[liste[0][0]][liste[0][1]] == grille[liste[2][0]][liste[2][1]]:
-            # VERIFIER QUE LA COMB EXISTE ENCORE, c’est une vérification de + au cas où il y a une erreur dans le raisonnement. 
-            #pourra être enlevé si démontré que non
-
-            # Si c’est une combinaison horizontale (les x des 3 2-uple sont les mêmes)
-            if liste[0][0] == liste[1][0] and liste[0][0] == liste[2][0]:
+        # On met la couleur blanche et affiche
+        grille[liste[0][0]][liste[0][1]], grille[liste[1][0]][liste[1][1]], grille[liste[2][0]][liste[2][1]] = 4, 4, 4
+        afficher_grille(grille)
         
-                # déplacer vers le bas
-                for (x, y) in liste:
-                    for x_i in range(x, 0, -1):
-                        grille[x_i][y] = grille[x_i-1][y]
+        # Si c’est une combinaison horizontale (les x des 3 2-uple sont les mêmes)
+        if liste[0][0] == liste[1][0] and liste[0][0] == liste[2][0]:
+    
+            # déplacer vers le bas
+            for (x, y) in liste:
+                for x_i in range(x, 0, -1):
+                    grille[x_i][y] = grille[x_i-1][y]
 
-                    # Modifier valeurs en haut (3 en ligne ou 3 en colonne)
-                    grille[0][y] = randint(0, 3)
-            
-            # Sinon, c’est une combinaison verticale
-            else:
-                x, y = liste[0] # On prend le premier couple, qui est la case du bas de la comb.
-                for _ in range(3):
-                    for i in range(y, 0, -1):
-                        grille[i][y] = grille[i-1][y]
+                # Modifier valeurs en haut (3 en ligne ou 3 en colonne)
+                grille[0][y] = randint(0, 3)
+        
+        # Sinon, c’est une combinaison verticale
+        else:
+            x, y = liste[0] # On prend le premier couple, qui est la case du bas de la comb.
+            for _ in range(3):
+                for i in range(x, 0, -1):
+                    grille[i][y] = grille[i-1][y]
 
-                    grille[0][y] = randint(0, 3)
+                grille[0][y] = randint(0, 3)
 
 
 def dcb(grille, x, y):
@@ -149,21 +151,22 @@ def dcb(grille, x, y):
         Sortie : 
             * list -> vide si le bonbon ne forme pas une combinaison, les coordonnées des autres bonbons de la comb sinon.
     """
-    
     liste = []
     
+    # Cas verticaux
     if 0 <= x-2:
         if grille[x-2][y] == grille[x-1][y] == grille[x][y]:
-            liste = [(x-2,y), (x-1,y), (x,y)]
+            liste = [(x,y), (x-1,y), (x-2,y)]
             
     if x-1 >= 0 and x+1 <= 4 and liste == []:
         if grille[x-1][y] == grille[x][y] == grille[x+1][y]:
-            liste = [(x-1,y), (x,y), (x+1,y)]
+            liste = [(x+1,y), (x,y), (x-1,y)]
             
     if x+2 <= 4  and liste == []:
         if grille[x][y] == grille[x+1][y] == grille[x+2][y]:
-            liste = [(x,y), (x+1,y), (x+2,y)]
-
+            liste = [(x+2,y), (x+1,y), (x,y)]
+    
+    # Cas horizontaux
     if 0 <= y-2 and liste == []:
         if grille[x][y-2] == grille[x][y-1] == grille[x][y]:
             liste = [(x,y-2), (x,y-1), (x,y)]
@@ -191,12 +194,12 @@ def creation_grille():
     return grille
     
 
-def afficher_grille(grille, nb_type_bonbons=4, latency=0.2):
+def afficher_grille(grille, nb_type_bonbons=5, latency=0.2):
     """
         Affiche la grille de jeu "grille" contenant au
         maximum "nb_type_bonbons" couleurs de bonbons différentes.
     """
-    plt.imshow(grille, vmin=0, vmax=nb_type_bonbons-1, cmap='jet')
+    plt.imshow(grille, vmin=0, vmax=nb_type_bonbons-1, cmap='terrain')
     plt.pause(latency)
     plt.draw()
     plt.pause(latency)

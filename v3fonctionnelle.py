@@ -8,7 +8,6 @@ def main():
     # On affiche la grille
     afficher_grille(grille)
 
-    score = 0
     fin = jeu_fini(grille)
     while not fin:
         # On demande les coordonnees des deux cellules a echanger
@@ -26,10 +25,8 @@ def main():
             # Modifie la grille pour enlever les combinaisons (une ou deux selon le cas)
             if combi1 != []:
                 supprime_comb(grille, combi1)
-                score += 1
             if combi2 != []:
                 supprime_comb(grille, combi2)
-                score += 1
             afficher_grille(grille)
 
             boucle_suppression(grille)

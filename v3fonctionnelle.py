@@ -17,7 +17,7 @@ def main():
         echange(grille, x1, y1, x2, y2)
         afficher_grille(grille)
         
-        combi1, combi2 = dcb(grille, x1, y1), dcb(grille, x2, y2)
+        combi1, combi2 = detecte_coo_comb(grille, x1, y1), detecte_coo_comb(grille, x2, y2)
         if combi1 == [] and combi2 == []:
             echange(grille, x1, y1, x2, y2)
             afficher_grille(grille)
@@ -91,7 +91,7 @@ def combinaison_presente(grille):
     x, y = 0, 0
     while not trouve and x < taille:
         while not trouve and y < taille:
-            c = dcb(grille, x, y)
+            c = detecte_coo_comb(grille, x, y)
             if c != []:
                 trouve = True
 
@@ -142,7 +142,7 @@ def supprime_comb(grille, liste, afficher=True):
                 grille[0][y] = randint(0, 3)
 
 
-def dcb(grille, x, y):
+def detecte_coo_comb(grille, x, y):
     """ 
         Fonction detecte_coordonnee_combinaison. Pour une cellule donnée, renvoie les coordonnées des bonbons constituant une combinaison 
         s'il y en a une, sinon une liste vide.

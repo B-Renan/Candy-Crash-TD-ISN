@@ -190,7 +190,7 @@ def creation_grille(taille):
     return grille
     
 
-def afficher_grille(grille, latency=0.05):
+def afficher_grille(grille, latency=0.15):
     """
         Affiche la grille de jeu "grille" contenant au
         maximum "nb_type_bonbons" couleurs de bonbons différentes.

@@ -200,5 +200,23 @@ def afficher_grille(grille, latency=0.15):
     plt.draw()
     plt.pause(latency)
 
+def test_detecte_coordonnees_combinaison():
+    """
+    Test la fonction detecte_coordonnees_combinaison(grille, i, j).
+    Pour chaque cas de test, affiche True si le test passe,
+    False sinon
+    """
+    
+    # Test1: Description du cas testé
+    grille = [[3,1,3,3,4], [2,1,2,2,3], [0,1,0,0,4], [3,2,3,3,4], [0,1,2,3,4]]
+    i = 0
+    j = 1
+    print(dcb(grille,i,j) == [(2,1), (1,1), (0,1)])
+          
+    # Test2: Description du cas testé
+    i = 2
+    j = 4
+    print(dcb(grille,i,j) == [(4,0), (3,4), (2,4)])
 
+test_detecte_coordonnees_combinaison()
 main()
